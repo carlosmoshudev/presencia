@@ -1,8 +1,8 @@
 {
-  "name": "presencia",
+  "name": "presencia-bot-ts-with-ai",
   "version": "1.0.0",
-  "description": "Bot Multiproposito para Discord",
-  "main": "index.js",
+  "description": "Bot Multiproposito para Discord y brazo en Discord de mi AI doméstica",
+  "main": "index.ts",
   "type": "commonjs",
   "scripts": {
     "start": "node ./build/src/index.js",
