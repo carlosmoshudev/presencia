@@ -34,7 +34,7 @@ export async function LoadCommands(client: Client): Promise<any> {
 
 export function LoadCategories(): Collection<string, string> {
   const categories: Collection<string, string> = new Collection();
-  ReadDir(path).forEach((category) => {
+  ReadDir(path).forEach(category => {
     categories.set(category, category);
   });
   return categories;

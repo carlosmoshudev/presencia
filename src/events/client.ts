@@ -11,7 +11,7 @@ export async function onReady(client: Client<true>): Promise<void> {
     ],
   });
 
-  await LoadCommands(client).then((cmds) => {
+  await LoadCommands(client).then(cmds => {
     (client as any).commands = cmds.commands;
     (client as any).aliases = cmds.aliases;
   });
@@ -31,7 +31,7 @@ export function onMessageCreate(message: Message<boolean>): void {
 }
 
 export async function onInteractionCreate(
-  interaction: Interaction,
+  interaction: Interaction
 ): Promise<void> {
   if (!interaction.isChatInputCommand()) return;
   const { client } = interaction;

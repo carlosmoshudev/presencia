@@ -12,8 +12,8 @@
     "tsc": "tsc"
   },
   "keywords": [],
-  "author": "Carlos Moshu Dev",
-  "license": "ISC",
+  "author": "Carlos Moshu Dev <carlos@carlosmoshu.com>",
+  "license": "UNLICENSED",
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",

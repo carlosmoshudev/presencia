@@ -19,13 +19,13 @@ const ChatBotClient = new Client(clientOptions);
 (ChatBotClient as any).aliases = new Collection();
 (ChatBotClient as any).categories = new Collection();
 
-ChatBotClient.on(ready, async (_client) => {
+ChatBotClient.on(ready, async _client => {
   await onReady(_client);
 });
-ChatBotClient.on(messageCreate, (_message) => {
+ChatBotClient.on(messageCreate, _message => {
   onMessageCreate(_message);
 });
-ChatBotClient.on(interactionCreate, async (_interaction) => {
+ChatBotClient.on(interactionCreate, async _interaction => {
   await onInteractionCreate(_interaction);
 });
 

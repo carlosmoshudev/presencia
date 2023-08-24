@@ -27,17 +27,17 @@ export async function LoadSlash(client: Client): Promise<void> {
 function ProcessCommand(
   builder: Builder,
   cmd: Command,
-  commands: JSONCommand[],
+  commands: JSONCommand[]
 ): void {
   const { name, description, parameters, subCommands } = cmd;
   builder?.setName(name).setDescription(description);
-  parameters?.forEach((arg) => ProcessParameter(builder, arg));
-  subCommands?.forEach((sub) => {
+  parameters?.forEach(arg => ProcessParameter(builder, arg));
+  subCommands?.forEach(sub => {
     const { name, description, options } = sub;
     const subBuilder = new SubSlashBuilder()
       .setName(name)
       .setDescription(description);
-    options?.forEach((option) => ProcessParameter(subBuilder, option));
+    options?.forEach(option => ProcessParameter(subBuilder, option));
     (builder as SlashBuilder).addSubcommand(subBuilder);
   });
   commands.push(builder.toJSON() as JSONCommand);
@@ -53,21 +53,21 @@ function BuildChoiceOption(cmd: Builder, arg: CmdArg): void {
   const { type, name, description, required, choices } = arg;
   switch (type) {
     case "number":
-      cmd.addIntegerOption((arg) =>
+      cmd.addIntegerOption(arg =>
         arg
           .setName(name)
           .setDescription(description)
           .setRequired(required)
-          .addChoices(...(choices as Array<OptionChoice<number>>)),
+          .addChoices(...(choices as Array<OptionChoice<number>>))
       );
       break;
     case "string":
-      cmd.addStringOption((option) =>
+      cmd.addStringOption(option =>
         option
           .setName(name)
           .setDescription(description)
           .setRequired(required)
-          .addChoices(...(choices as Array<OptionChoice<string>>)),
+          .addChoices(...(choices as Array<OptionChoice<string>>))
       );
       break;
     default:
@@ -77,51 +77,51 @@ function BuildChoiceOption(cmd: Builder, arg: CmdArg): void {
 }
 function BuildOption(
   builder: SlashBuilder | SubSlashBuilder,
-  cmdArg: CmdArg,
+  cmdArg: CmdArg
 ): void {
   const { type, name, description, required } = cmdArg;
   switch (type) {
     case "boolean":
-      builder.addBooleanOption((arg) =>
-        arg.setName(name).setDescription(description).setRequired(required),
+      builder.addBooleanOption(arg =>
+        arg.setName(name).setDescription(description).setRequired(required)
       );
       break;
     case "category":
-      builder.addChannelOption((arg) =>
+      builder.addChannelOption(arg =>
         arg
           .setName(name)
           .setDescription(description)
           .setRequired(required)
-          .addChannelTypes(ChannelType.GuildCategory),
+          .addChannelTypes(ChannelType.GuildCategory)
       );
       break;
     case "channel":
-      builder.addChannelOption((arg) =>
+      builder.addChannelOption(arg =>
         arg
           .setName(name)
           .setDescription(description)
           .setRequired(required)
-          .addChannelTypes(ChannelType.GuildText),
+          .addChannelTypes(ChannelType.GuildText)
       );
       break;
     case "number":
-      builder.addIntegerOption((arg) =>
-        arg.setName(name).setDescription(description).setRequired(required),
+      builder.addIntegerOption(arg =>
+        arg.setName(name).setDescription(description).setRequired(required)
       );
       break;
     case "role":
-      builder.addRoleOption((arg) =>
-        arg.setName(name).setDescription(description).setRequired(required),
+      builder.addRoleOption(arg =>
+        arg.setName(name).setDescription(description).setRequired(required)
       );
       break;
     case "string":
-      builder.addStringOption((arg) =>
-        arg.setName(name).setDescription(description).setRequired(required),
+      builder.addStringOption(arg =>
+        arg.setName(name).setDescription(description).setRequired(required)
       );
       break;
     case "user":
-      builder.addUserOption((arg) =>
-        arg.setName(name).setDescription(description).setRequired(required),
+      builder.addUserOption(arg =>
+        arg.setName(name).setDescription(description).setRequired(required)
       );
       break;
     default:

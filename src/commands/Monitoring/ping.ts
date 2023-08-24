@@ -18,7 +18,7 @@ export class ConcreteCommand extends Command {
     const MessageLatency: number = Date.now() - slash?.createdTimestamp;
     slash.channel
       ?.send(
-        `Pong!  :ping_pong: \nLatencia de mensajes: ${MessageLatency}ms\nLatencia de la API: ${APIlatency}ms`,
+        `Pong!  :ping_pong: \nLatencia de mensajes: ${MessageLatency}ms\nLatencia de la API: ${APIlatency}ms`
       )
       .catch(console.error);
   }
