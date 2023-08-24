@@ -16,7 +16,7 @@ export async function LoadCommands(client: Client): Promise<any> {
       if (file.endsWith(ext)) {
         const cmdClass = await import(Join(path, category, file));
         const cmd: Command = new cmdClass.ConcreteCommand(client);
-        
+
         commands.set(cmd.name, cmd);
 
         for (const alias of cmd.aliases) {

@@ -1,12 +1,10 @@
-import type { APIApplicationCommandOptionChoice as iComandOption} from "discord.js";
+import type { APIApplicationCommandOptionChoice as iComandOption } from "discord.js";
 
 export interface CommandArgument {
   name: string;
   description: string;
   required: boolean;
-  choices?:
-    | Array<iComandOption<string>>
-    | Array<iComandOption<number>>;
+  choices?: Array<iComandOption<string>> | Array<iComandOption<number>>;
   type:
     | "string"
     | "number"

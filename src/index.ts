@@ -1,10 +1,15 @@
-import { DiscordLibrary, ExternalFunctions, ClientEvents, Enums } from "./imports";
+import {
+  DiscordLibrary,
+  ExternalFunctions,
+  ClientEvents,
+  Enums,
+} from "./imports";
 
 const { Collection, Client, clientOptions } = DiscordLibrary;
 const { SetEnvironmentVariables } = ExternalFunctions;
-const { onReady, onMessageCreate } = ClientEvents;
+const { onReady, onMessageCreate, onInteractionCreate } = ClientEvents;
 const { ClientEventsNames } = Enums;
-const { ready, messageCreate } = ClientEventsNames;
+const { ready, messageCreate, interactionCreate } = ClientEventsNames;
 
 SetEnvironmentVariables();
 
@@ -19,6 +24,9 @@ ChatBotClient.on(ready, async (_client) => {
 });
 ChatBotClient.on(messageCreate, (_message) => {
   onMessageCreate(_message);
+});
+ChatBotClient.on(interactionCreate, async (_interaction) => {
+  await onInteractionCreate(_interaction);
 });
 
 ChatBotClient.login(process.env.TOKEN).catch(console.error);
