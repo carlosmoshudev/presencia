@@ -14,7 +14,7 @@ export class ConcreteCommand extends Command {
   }
 
   async execute(slash: Interaction): Promise<void> {
-    const APIlatency: number = slash.client?.ws.ping | 0;
+    const APIlatency: number = slash.client?.ws.ping ?? 0;
     const MessageLatency: number = Date.now() - slash?.createdTimestamp;
     slash.channel
       ?.send(

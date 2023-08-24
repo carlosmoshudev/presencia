@@ -1,33 +1,36 @@
-import {
-  DiscordLibrary,
-  ExternalFunctions,
-  ClientEvents,
-  Enums,
-} from "./imports";
+// Import external dependencies
+import { config as InitializeEnvironmentVariables } from "dotenv";
+import { Client, Collection } from "discord.js";
 
-const { Collection, Client, clientOptions } = DiscordLibrary;
-const { SetEnvironmentVariables } = ExternalFunctions;
-const { onReady, onMessageCreate, onInteractionCreate } = ClientEvents;
-const { ClientEventsNames } = Enums;
-const { ready, messageCreate, interactionCreate } = ClientEventsNames;
+// Import internal modules
+import './class/discord';
+import { onMessageCreate, onInteractionCreate } from "./events/client";
+import { onReady } from "./events/events";
+import clientOptions from "./configuration/client-options";
 
-SetEnvironmentVariables();
+// Initialize environment variables
+InitializeEnvironmentVariables();
 
-const ChatBotClient = new Client(clientOptions);
+// Initialize bot
+const Bot = new Client(clientOptions);
 
-(ChatBotClient as any).commands = new Collection();
-(ChatBotClient as any).aliases = new Collection();
-(ChatBotClient as any).categories = new Collection();
-
-ChatBotClient.on(ready, async _client => {
-  await onReady(_client);
-});
-ChatBotClient.on(messageCreate, _message => {
-  onMessageCreate(_message);
-});
-ChatBotClient.on(interactionCreate, async _interaction => {
-  await onInteractionCreate(_interaction);
+// Attach custom properties to the Bot client
+Object.assign(Bot as any, {
+  commands: new Collection(),
+  aliases: new Collection(),
+  categories: new Collection(),
 });
 
-ChatBotClient.login(process.env.TOKEN).catch(console.error);
-// index.ts
+// Register event handlers
+Bot.on("ready", async clt => await onReady(clt));
+Bot.on("messageCreate", msg => onMessageCreate(msg));
+Bot.on("interactionCreate", async cmd => await onInteractionCreate(cmd));
+
+// Ensure bot token exists before login
+if (process.env.TOKEN === undefined || process.env.TOKEN === null) {
+  console.error("Bot token is missing. Make sure to set it in your .env file.");
+  process.exit(1);
+}
+
+// Login to Discord
+Bot.login(process.env.TOKEN).catch(console.error);
