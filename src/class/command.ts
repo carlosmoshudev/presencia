@@ -1,5 +1,5 @@
 import { Client, Interaction } from "discord.js";
-import { Parameter, SubCommandOptions } from "./command-types";
+import type { CommandArgument, SubCommand } from "../types/command-types";
 
 export abstract class Command {
   client: Client;
@@ -7,8 +7,8 @@ export abstract class Command {
   aliases: string[];
   description: string;
   usage: string;
-  subCommands: SubCommandOptions[];
-  parameters: Parameter[];
+  subCommands: SubCommand[];
+  parameters: CommandArgument[];
   permission: string;
   category: string;
   production: boolean;

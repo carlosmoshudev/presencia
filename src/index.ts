@@ -1,19 +1,25 @@
-import { Collection } from "discord.js";
-import { ExtendedClient } from "./class/discord";
-import { config } from "dotenv";
-import clientOptions from "./configuration/client-options";
-config();
+import { DiscordLibrary, ExternalFunctions, ClientEvents, Enums } from "./imports";
 
-const chatBot: ExtendedClient = new ExtendedClient(clientOptions);
-const { client } = chatBot;
+const { Collection, Client, clientOptions } = DiscordLibrary;
+const { SetEnvironmentVariables } = ExternalFunctions;
+const { onReady, onMessageCreate } = ClientEvents;
+const { ClientEventsNames } = Enums;
+const { ready, messageCreate } = ClientEventsNames;
 
-chatBot.commands = new Collection();
-chatBot.aliases = new Collection();
-chatBot.categories = new Collection();
+SetEnvironmentVariables();
 
-client.on("ready", () => {
-  console.log(`Logged in!`);
+const ChatBotClient = new Client(clientOptions);
+
+(ChatBotClient as any).commands = new Collection();
+(ChatBotClient as any).aliases = new Collection();
+(ChatBotClient as any).categories = new Collection();
+
+ChatBotClient.on(ready, async (_client) => {
+  await onReady(_client);
+});
+ChatBotClient.on(messageCreate, (_message) => {
+  onMessageCreate(_message);
 });
 
-client.login(process.env.TOKEN).catch(console.error);
-// --snip--
+ChatBotClient.login(process.env.TOKEN).catch(console.error);
+// index.ts
