@@ -1,10 +1,6 @@
-import { Interaction, Message } from "discord.js";
+import { Interaction } from "discord.js";
 
-export function onMessageCreate(message: Message<boolean>): void {
-  console.log(`Message received!`);
-}
-
-export async function onInteractionCreate(
+async function event(
   interaction: Interaction
 ): Promise<void> {
   if (!interaction.isChatInputCommand()) return;
@@ -29,4 +25,4 @@ export async function onInteractionCreate(
     .catch(console.error);
 }
 
-//
+export default event;

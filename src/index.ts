@@ -4,8 +4,7 @@ import { Client, Collection } from "discord.js";
 
 // Import internal modules
 import './class/discord';
-import { onMessageCreate, onInteractionCreate } from "./events/client";
-import { onReady } from "./events/events";
+import { onReady, onInteractionCreate, onMessageCreate } from "./events/collection";
 import clientOptions from "./configuration/client-options";
 
 // Initialize environment variables
