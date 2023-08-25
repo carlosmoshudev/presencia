@@ -2,26 +2,28 @@ import { ActivityType, Client } from "discord.js";
 import { LoadCommands, LoadCategories } from "../../functions/command-loader";
 import { LoadSlash } from "../../functions/slash-commands";
 
+const presenceText = "Byte Collection"; // Exportar a un archivo de configuración
+
 async function event(client: Client<true>): Promise<void> {
-  const bot = client as any;
+  const collectionsClient = client as any;
   client.user.setPresence({
     activities: [
       {
-        name: "Byte Collection", // extraer a un archivo de configuracion
+        name: presenceText,
         type: ActivityType.Custom,
       },
     ],
   });
 
-  await LoadCommands(client).then(cmds => {
-    bot.commands = cmds.commands;
-    bot.aliases = cmds.aliases;
+  await LoadCommands(client).then(commands => {
+    collectionsClient.commands = commands.commands;
+    collectionsClient.aliases = commands.aliases;
   });
-  bot.categories = LoadCategories();
+  collectionsClient.categories = LoadCategories();
   await LoadSlash(client);
 
   const guildsJoined: number = client.guilds.cache.size;
-  const commandsLoaded: number = (client as any).commands.size;
+  const commandsLoaded: number = collectionsClient.commands.size;
 
     console.log(`Información de la sesión:`);
   console.log(`\x1b[32m%s\x1b[0m`,`[PresencIA] Sesión iniciada`,`\x1b[33m${client.user.tag}\x1b[0m`);
