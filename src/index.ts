@@ -64,4 +64,6 @@ if (process.env.TOKEN === undefined || process.env.TOKEN === null) {
 }
 
 // Login to Discord
-Bot.login(process.env.TOKEN).catch(console.error);
+Bot.login(process.env.TOKEN)
+.then(() => console.log(`\x1b[32m%s\x1b[0m`,`\r\n| ============================ |\r\n`))
+.catch(console.error);
