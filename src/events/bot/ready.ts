@@ -1,13 +1,13 @@
 import { ActivityType, Client } from "discord.js";
-import { LoadCommands, LoadCategories } from "../functions/command-loader";
-import { LoadSlash } from "../functions/slash-commands";
+import { LoadCommands, LoadCategories } from "../../functions/command-loader";
+import { LoadSlash } from "../../functions/slash-commands";
 
 async function event(client: Client<true>): Promise<void> {
   const bot = client as any;
   client.user.setPresence({
     activities: [
       {
-        name: "Byte Collection",
+        name: "Byte Collection", // extraer a un archivo de configuracion
         type: ActivityType.Custom,
       },
     ],

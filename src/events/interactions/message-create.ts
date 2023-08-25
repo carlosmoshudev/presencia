@@ -1,8 +1,9 @@
 import { Message } from "discord.js";
 
-export function onMessageCreate(message: Message<boolean>): void {
+function event(message: Message<boolean>): void {
   console.log(`Message received!`);
 }
 
+export default event;
 
 //
