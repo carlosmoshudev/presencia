@@ -1,0 +1,11 @@
+{
+  "events": {
+    "ready": {
+      "presenceText": "Byte[]",
+      "logTitle": "Información de la sesión:",
+      "logInitialized": "[PresencIA] Sesión iniciada",
+      "logJoined": "[PresencIA] Bot unido en",
+      "logCommands": "[PresencIA] Se han cargado"
+    }
+  }
+}
